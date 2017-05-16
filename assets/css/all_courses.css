@@ -1,0 +1,19 @@
+.btn-custom-style{
+    float:right;  
+    position: relative;
+    margin-bottom: 10px;
+    padding-bottom: 10px
+}
+
+body { 
+
+    background: url(grey.png)  no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.panel-margin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

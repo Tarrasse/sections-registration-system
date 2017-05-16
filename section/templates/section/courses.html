@@ -8,6 +8,14 @@
 </head>
 <body>
 
+<script>
+
+    function test(s){
+        alert(s)
+    }
+
+</script>
+
 <div class="container">
     <div class="panel-group">
         {% for name in names %}
@@ -17,7 +25,7 @@
             <ul>
                 {% for section in sections %}
                     {% if section.2 == name %}
-                        <li>{{ section.0 }}-{{section.1}}-{{ section.2 }}</li>
+                        <li onclick="test({{ section.0 }})">{{section.1}}-{{ section.2 }}</li>
                     {% endif %}
                 {% endfor %}
             </ul>

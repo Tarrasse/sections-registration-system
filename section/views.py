@@ -15,7 +15,7 @@ def login(request):
             if row is not None and password in row:
                 request.session['sid'] = id
             else:
-                render(request, "section/login.html", {'form': form})
+                return render(request, "section/login.html", {'form': form})
             return redirect('/sections/')
         else:
             render(request, "section/login.html", {'form': form})
@@ -50,7 +50,8 @@ def sections(request):
 
 def all_sections(request):
     (sections_list, names_set) = handler.query_sections()
-    return render(request, 'section/courses.html', {'sections': sections_list, 'names': names_set})
+    print sections_list, names_set
+    return render(request, 'section/all_courses.html', {'sections': sections_list, 'names': names_set})
 
 
 def register(request):
@@ -84,5 +85,3 @@ def test(request):
         section_id = request.GET.get('id', '')
         handler.register(section_id=section_id, student_id=student_id)
     return render(request, "section/test.html", {'s': request.session.get('sid')})
-
-# TODO: if not signed in check if id in the param

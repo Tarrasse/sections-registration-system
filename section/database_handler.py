@@ -17,22 +17,25 @@ def query_user(sid):
 
 
 def register(section_id, student_id):
+    print section_id, student_id
     with connection.cursor() as cursor:
         cursor.execute('''
         SELECT count(*)
         FROM section_reg
-        WHERE sid={} AND section_id_id={}
+        WHERE sid_id={} AND section_id_id={}
         '''.format(student_id, section_id))
-
-        rows = cursor.fetchall()
-        if len(rows) == 0:
+        rows = cursor.fetchone()
+        print "same reg " + str(rows[0])
+        if rows[0] == 0:
             regs = query_regs(section_id)
-            if regs <= 25:
+
+            if regs[0] <= 25:
                 cursor.execute('''
                 INSERT INTO section_reg ('sid_id', 'section_id_id')
                 VALUES ({}, {})
                 '''.format(str(student_id),
                            str(section_id)))
+                print "inserted"
                 return True
             else:
                 return False
@@ -75,25 +78,23 @@ def query_regs(section_id):
         WHERE section_id_id={}
         '''.format(section_id))
         rows = cursor.fetchall()
-        return len(rows)
+        return rows[0]
 
 
 def query_sections():
     with connection.cursor() as cursor:
         cursor.execute('''
-           SELECT section_section.id ,date, course_id FROM section_section
-           INNER JOIN section_reg
-           ON section_section.id = section_Reg.section_id_id
+           SELECT section_section.id ,date, section_course.name FROM section_section
+           INNER JOIN section_course
+           ON section_section.course_id = section_course.id
            ''')
         rows = cursor.fetchall()
         names_set = set()
-        l = []
         for row in rows:
-            name = get_table_name(row[2])
+            name = row[2]
             if name not in names_set:
                 names_set.add(name)
-            l.append((row[0], row[1], name))
-        return l, names_set
+        return rows, names_set
 
 
 def get_table_name(course_id):
