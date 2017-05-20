@@ -31,11 +31,10 @@ class Section(models.Model):
     place = models.CharField(max_length=255)
     available = models.IntegerField()
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
-    Students = models.ManyToManyField(Student)
+    students = models.ManyToManyField(Student)
 
     def __str__(self):
         return self.date + " - " + self.place
 
     def __unicode__(self):
         return self.date + " - " + self.place
-

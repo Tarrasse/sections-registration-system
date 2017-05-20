@@ -11,6 +11,22 @@ class CourseAdmin(admin.ModelAdmin):
     inlines = [SectionInline, ]
 
 
-admin.site.register(Student)
+class RegistrationInline(admin.TabularInline):
+    model = Section.students.through
+
+
+class StudentAdmin(admin.ModelAdmin):
+    inlines = [
+        RegistrationInline,
+    ]
+
+
+class SectionAdmin(admin.ModelAdmin):
+    inlines = [
+        RegistrationInline,
+    ]
+
+
+admin.site.register(Student, StudentAdmin)
 admin.site.register(Course, CourseAdmin)
-admin.site.register(Section)
+admin.site.register(Section, SectionAdmin)
