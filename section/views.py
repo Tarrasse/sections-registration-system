@@ -18,7 +18,7 @@ def login(request):
                 return render(request, "section/login.html", {'form': form})
             return redirect('/sections/')
         else:
-            render(request, "section/login.html", {'form': form})
+            return render(request, "section/login.html", {'form': form})
     return render(request, "section/login.html", {'form': form})
 
 
@@ -45,13 +45,12 @@ def sections(request):
     else:
         student_id = handler.query_user(sid)[0]
         (sections_list, names_set) = handler.query_student_sections(student_id=student_id)
-        return render(request, 'section/courses.html', {'sections': sections_list, 'names': names_set})
+        return render(request, 'section/sections.html', {'sections': sections_list, 'names': names_set})
 
 
 def all_sections(request):
     (sections_list, names_set) = handler.query_sections()
-    print sections_list, names_set
-    return render(request, 'section/all_courses.html', {'sections': sections_list, 'names': names_set})
+    return render(request, 'section/all_sections.html', {'sections': sections_list, 'names': names_set})
 
 
 def register(request):
@@ -80,8 +79,4 @@ def log_out(request):
 
 
 def test(request):
-    student_id = request.session.get('sid')
-    if request.method == 'GET':
-        section_id = request.GET.get('id', '')
-        handler.register(section_id=section_id, student_id=student_id)
-    return render(request, "section/test.html", {'s': request.session.get('sid')})
+    return render(request, "section/test.html")

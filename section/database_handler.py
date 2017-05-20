@@ -17,7 +17,6 @@ def query_user(sid):
 
 
 def register(section_id, student_id):
-    print section_id, student_id
     with connection.cursor() as cursor:
         cursor.execute('''
         SELECT count(*)
@@ -25,7 +24,6 @@ def register(section_id, student_id):
         WHERE sid_id={} AND section_id_id={}
         '''.format(student_id, section_id))
         rows = cursor.fetchone()
-        print "same reg " + str(rows[0])
         if rows[0] == 0:
             regs = query_regs(section_id)
 
@@ -35,7 +33,6 @@ def register(section_id, student_id):
                 VALUES ({}, {})
                 '''.format(str(student_id),
                            str(section_id)))
-                print "inserted"
                 return True
             else:
                 return False
@@ -84,7 +81,8 @@ def query_regs(section_id):
 def query_sections():
     with connection.cursor() as cursor:
         cursor.execute('''
-           SELECT section_section.id ,date, section_course.name FROM section_section
+           SELECT section_section.id ,date, section_course.name
+           FROM section_section
            INNER JOIN section_course
            ON section_section.course_id = section_course.id
            ''')
@@ -98,18 +96,13 @@ def query_sections():
 
 
 def get_table_name(course_id):
+    """
+    :param course_id:
+    :return: the course name
+    """
     with connection.cursor() as cursor:
         cursor.execute('''
         SELECT name FROM section_course WHERE id = {}'''.format(course_id))
         row = cursor.fetchone()
         return row[0]
 
-
-def test():
-    with connection.cursor() as cursor:
-        cursor.execute('''
-             SELECT * FROM section_reg
-             WHERE section_reg.id = 5000
-             ''')
-        row = cursor.fetchall()
-        print type(row)
