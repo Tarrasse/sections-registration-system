@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from section.models import Client, Course, Section, Reg
+from section.models import Student, Course, Section
 
 
 class SectionInline(admin.TabularInline):
@@ -11,20 +11,6 @@ class CourseAdmin(admin.ModelAdmin):
     inlines = [SectionInline, ]
 
 
-class RegInline(admin.TabularInline):
-    model = Reg
-    extra = 1
-
-
-class SectionAdmin(admin.ModelAdmin):
-    inlines = [RegInline, ]
-
-
-class ClientAdmin(admin.ModelAdmin):
-    inlines = [RegInline, ]
-
-
-admin.site.register(Client, ClientAdmin)
+admin.site.register(Student)
 admin.site.register(Course, CourseAdmin)
-admin.site.register(Section, SectionAdmin)
-admin.site.register(Reg)
+admin.site.register(Section)
