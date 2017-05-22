@@ -20,8 +20,8 @@
             <h4>{{name}}</h4><br>
             <ul>
                 {% for section in sections %}
-                {% if section.2 == name %}
-                <li onclick="test({{ section.0 }})">{{section.1}}-{{ section.2 }}</li>
+                {% if section.1 == name %}
+                <li>{{section.0}} - {{ section.1 }}</li>
                 {% endif %}
                 {% endfor %}
             </ul>

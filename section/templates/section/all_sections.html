@@ -30,11 +30,11 @@
                 <ul class="list-group">
                     <div class="align">
                         {% for section in sections %}
-                        {% if section.2 == name %}
+                        {% if section.1 == name %}
                         <li class="list-group-item">
-                            {{ section.1 }}
+                            {{ section.0 }}
                             <button type="button" class="btn-custom-style btn btn-primary"
-                                    onclick="reg({{ section.0 }})"> Register
+                                    onclick="reg({{ section.2 }})"> Register
                             </button>
                         </li>
                         {% endif %}

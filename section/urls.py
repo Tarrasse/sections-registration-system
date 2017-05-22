@@ -9,5 +9,4 @@ urlpatterns = [
     url(r'^all$', views.all_sections, name='all_sections'),
     url(r'^register$', views.register, name='register'),
     url(r'^$', views.sections, name='sections'),
-    url(r'^test$', views.test),
 ]

@@ -29,7 +29,6 @@ class Section(models.Model):
     date = models.CharField(max_length=255)
     capacity = models.IntegerField(default=25)
     place = models.CharField(max_length=255)
-    available = models.IntegerField()
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
     students = models.ManyToManyField(Student)
 
