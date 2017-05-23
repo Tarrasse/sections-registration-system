@@ -9,22 +9,24 @@
 {% block content %}
 {% spaceless %}
 <div class="container">
-    <div class="pull-right">
+    <div >
         <button type="button" class="btn btn-primary" onclick="logout()">Logout</button>
-        <a href="http://localhost:8000/sections/all"><button type="button" class="btn btn-primary pull-right">All sections</button></a>
+        <a href="{% url 'section:all_sections' %}">
+            <button type="button" class="btn btn-primary pull-right">All sections</button>
+        </a>
     </div>
     <div class="panel-group">
         {% for name in names %}
         <div class="panel panel-default">
 
-            <h4>{{name}}</h4><br>
-            <ul>
+            <ul class="list-group">
                 {% for section in sections %}
                 {% if section.1 == name %}
-                <li>{{section.0}} - {{ section.1 }}</li>
+                <li class="list-group-item">{{section.0}} - {{ section.1 }}</li>
                 {% endif %}
                 {% endfor %}
             </ul>
+            <div class="panel-footer">{{ name }}</div>
         </div>
         {% endfor %}
     </div>

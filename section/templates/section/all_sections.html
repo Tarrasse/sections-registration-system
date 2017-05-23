@@ -12,12 +12,10 @@
 {% spaceless %}
 
 <div class="container">
-    <div class="pull-right">
+    <div>
         <button type="button" class="btn btn-primary" onclick="logout()">Logout</button>
         <a href="{% url 'section:sections' %}"><button type="button" class="btn btn-primary pull-right">my sections</button></a>
     </div>
-    <br/>
-    <br/>
     {% for name in names %}
     <div class="panel-margin panel-group">
         <div class="panel panel-default">
