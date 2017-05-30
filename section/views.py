@@ -80,12 +80,12 @@ def register(request):
             return JsonResponse({'success': False, 'message': 'wrong parameters: section id is missing'})
 
         student = Student.objects.get(sid=student_sid)
+        section = Section.objects.get(pk=section_id)
 
         for s in student.section_set.all():
-            if s.id == section_id:
+            if s.course.id == section.course.id:
                 return JsonResponse({'success': True})
 
-        section = Section.objects.get(pk=section_id)
         if section.students.count() < 25:
             section.students.add(student)
             return JsonResponse({'success': True})
